@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RIM_Task_06
+namespace RIM_Task_04
 {
-    class Program
+    class RIM_Task_04
     {
         static void Main(string[] args)
         {

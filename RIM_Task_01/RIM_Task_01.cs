@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RIM_Task_01
 {
-    class Program
+    class RIM_Task_01
     {
         static void Main(string[] args)
         {
