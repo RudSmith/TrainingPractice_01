@@ -27,6 +27,7 @@ namespace RIM_Task_01
             // Crystalls amount that user has
             ulong userCrystallsAmount = 0;
 
+            // Outputting the result using ternary operator
             Console.WriteLine( exchangeRate * crystallsBuyingAmount > userGoldAmount 
                 ? $"Not enougn money. Your balance: { userGoldAmount } gold and { userCrystallsAmount } crystalls."
                 : $"Success. Your balance: { userGoldAmount - exchangeRate * crystallsBuyingAmount } gold and { crystallsBuyingAmount } crystalls.");
