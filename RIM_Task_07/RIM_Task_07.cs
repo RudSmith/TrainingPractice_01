@@ -13,8 +13,8 @@ namespace RIM_Task_07
             // В цикле генерируем два индекса, элементы под которыми будут обменяны значениями
             for(int iter = 0; iter < size; ++iter)
             {
-                int swapIndex1 = rnd.Next(0, size - 1);
-                int swapIndex2 = rnd.Next(0, size - 1);
+                int swapIndex1 = rnd.Next(0, size);
+                int swapIndex2 = rnd.Next(0, size);
 
                 int temp = array[swapIndex1];
                 array[swapIndex1] = array[swapIndex2];
