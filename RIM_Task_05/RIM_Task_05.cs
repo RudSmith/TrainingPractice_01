@@ -323,6 +323,7 @@ namespace RIM_Task_05
     {
         static void Main(string[] args)
         {
+            // Игрок получает информацию об игре
             Console.WriteLine("Вы попали в подземелье, полное врагов. \nВам нужно сбежать отсюда. \nВыход справа внизу.");
             Console.WriteLine("Вы обозначены крестиком, ваши враги - буквами 'e'.");
             Console.WriteLine("Если в конце хода вы встанете в одной клетке с врагом, вы получите урон.");
@@ -331,6 +332,7 @@ namespace RIM_Task_05
             Console.ReadKey(true);
             Console.Clear();
 
+            // Игра начинается
             Labirynth labirynth = new Labirynth();
             labirynth.StartGame();
 
