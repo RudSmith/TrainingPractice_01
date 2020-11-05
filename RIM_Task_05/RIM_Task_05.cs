@@ -7,7 +7,7 @@ namespace RIM_Task_05
     {
         public Entity(char symbol)
         {
-            m_position = new Tuple<int, int>(-1, -1);
+            m_position = new Tuple<int, int>(0, 0);
             m_symbol = symbol;
         }
 
@@ -55,80 +55,91 @@ namespace RIM_Task_05
     {
         public Labirynth()
         {
-            m_mapFileReader = new StreamReader(m_mapFilePath);
-            m_map = new char[m_mapSize, m_mapSize];
+            m_map = new string[m_mapSize] { "------------",
+                                            "|           ",
+                                            "| |--------|",
+                                            "| |        |",
+                                            "| |        |",
+                                            "|          |",
+                                            "|          |",
+                                            "|------- --|",
+                                            "|          |",
+                                            "|  --------|",
+                                            "|          ",
+                                            "------------" };
 
-            m_player = new Entity('P');
-
-            for (int i = 0; i < m_mapSize; ++i)
-                for(int j = 0; j < m_mapSize; ++j)
-                    m_map[i, j] = Convert.ToChar(m_mapFileReader.Read());
-
+            m_player = new Entity('x');
             m_player.SetPosition(new Tuple<int, int>(1, 10));
-
-            m_isRightPathPrinted = false;
-            m_mapFileReader.Close();
         }
 
         public void Print()
         {
             Console.Clear();
 
-            for (int i = 0; i < m_mapSize; ++i)
-                for (int j = 0; j < m_mapSize; ++j)
-                {
-                    if (m_map[i, j] == '.')
-                    {
-                        if (m_isRightPathPrinted)
-                            Console.Write(m_map[i, j]);
-                        else
-                            Console.Write(' ');
-                    }
-                    else
-                        Console.Write(m_map[i, j]);
-                }
+            for(int i = 0; i < m_mapSize; ++i)
+            {
+                Console.Write(m_map[i]);
+                Console.WriteLine();
+            }
 
             Console.SetCursorPosition(m_player.GetPosition().Item2, m_player.GetPosition().Item1);
             Console.Write(m_player.GetSymbol());
         }
 
-        public void AskForHelp()
+        private bool _isMoveCorrect(int x, int y)
         {
-            m_isRightPathPrinted = true;
+            if (x >= m_mapSize || y >= m_mapSize || x <= 0 || y <= 0 || m_map[x][y] != ' ')
+                return false;
+            else
+                return true;
+
         }
 
         public void StartGame()
         {
-            while(true)
+            while(!m_isGameEnded)
             {
                 this.Print();
+
                 char keyPressed = Console.ReadKey(true).KeyChar;
                 
-                switch(keyPressed)
+
+                switch (keyPressed)
                 {
                 case 'a':
-                    m_player.MoveLeft();
+                    if (_isMoveCorrect(m_player.GetPosition().Item1, m_player.GetPosition().Item2 - 1)) 
+                        m_player.MoveLeft();
                     break;
                 case 'w':
-                    m_player.MoveUp();
+                    if (_isMoveCorrect(m_player.GetPosition().Item1 - 1, m_player.GetPosition().Item2)) 
+                        m_player.MoveUp();
                     break;
                 case 'd':
-                    m_player.MoveRight();
+                    if (_isMoveCorrect(m_player.GetPosition().Item1, m_player.GetPosition().Item2 + 1)) 
+                        m_player.MoveRight();
                     break;
                 case 's':
-                    m_player.MoveDown();
+                    if (_isMoveCorrect(m_player.GetPosition().Item1 + 1, m_player.GetPosition().Item2))
+                        m_player.MoveDown();
                     break;
+                }
+
+
+                if (m_player.GetPosition().Equals(m_mazeEndPoint))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Congratulations! You won!");
+                    m_isGameEnded = true;
                 }
             }
         }
 
+        private string [] m_map;
+        private const int m_mapSize = 12;
 
-        private StreamReader m_mapFileReader;
-        private const string m_mapFilePath = "map.txt";
-        private char [,] m_map;
-        private const int m_mapSize = 31;
+        private Tuple<int, int> m_mazeEndPoint = new Tuple<int, int>(10, 10);
 
-        private bool m_isRightPathPrinted;
+        private bool m_isGameEnded;
 
         private Entity m_player;
     }
@@ -140,7 +151,7 @@ namespace RIM_Task_05
             Labirynth labirynth = new Labirynth();
             labirynth.StartGame();
 
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
     }
 }
