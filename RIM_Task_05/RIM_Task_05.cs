@@ -327,8 +327,8 @@ namespace RIM_Task_05
             Console.WriteLine("Вы обозначены крестиком, ваши враги - буквами 'e'.");
             Console.WriteLine("Если в конце хода вы встанете в одной клетке с врагом, вы получите урон.");
             Console.WriteLine("Для управления используйте кнопки w, a, s, d.");
-            Console.WriteLine("Да прибудет с вами сила! Начало игры через 15 секунд.");
-            System.Threading.Thread.Sleep(15000);
+            Console.WriteLine("Да прибудет с вами сила! Для начала игры нажмите любую кнопку.");
+            Console.ReadKey(true);
             Console.Clear();
 
             Labirynth labirynth = new Labirynth();
