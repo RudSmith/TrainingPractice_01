@@ -77,9 +77,7 @@ namespace RIM_Task_05
             for (int i = 0; i < m_mapSize; ++i)
                 for (int j = 0; j < m_mapSize; ++j)
                 {
-                    if (m_player.GetPosition().Equals(new Tuple<int, int>(i, j)))
-                        Console.Write(m_player.GetSymbol());
-                    else if (m_map[i, j] == '.')
+                    if (m_map[i, j] == '.')
                     {
                         if (m_isRightPathPrinted)
                             Console.Write(m_map[i, j]);
@@ -90,7 +88,8 @@ namespace RIM_Task_05
                         Console.Write(m_map[i, j]);
                 }
 
-            Console.WriteLine(m_player.GetPosition());
+            Console.SetCursorPosition(m_player.GetPosition().Item2, m_player.GetPosition().Item1);
+            Console.Write(m_player.GetSymbol());
         }
 
         public void AskForHelp()
