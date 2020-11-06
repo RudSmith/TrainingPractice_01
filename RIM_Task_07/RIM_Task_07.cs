@@ -5,7 +5,7 @@ namespace RIM_Task_07
     class RIM_Task_07
     {
         // Метод для перемешивания массива
-        public static void _shuffle(int[] array, int size)
+        private static void _shuffle(int[] array, int size)
         {
             // Создаём экземпляр класса Random для генерации случайных чисел
             Random rnd = new Random();
